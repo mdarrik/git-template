@@ -23,7 +23,9 @@ spawnSync('git', ['init'], {
 fs.writeFileSync(path.join(tmp, '.git', 'HEAD'), 'ref: refs/heads/main')
 // writes to the exclude hook
 const excludeFile = fs.readFileSync('./exclude');
+if(!fs.existsSync(path.join(tmp,'.git', 'info'))) {
 fs.mkdirSync(path.join(tmp,'.git', 'info'));
+}
 fs.writeFileSync(path.join(tmp, '.git', 'info', 'exclude'), excludeFile);
 mv(path.join(tmp, '.git'), dir, err => {
   if (err) {
